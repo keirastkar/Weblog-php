@@ -1,0 +1,65 @@
+.navbar{
+    background-color: #F9E2AF;
+}
+.btnnavbar{
+    border: solid 1px #009FBD;
+    color: #009FBD;
+}
+.btnnavbar:hover{
+    background-color: #009FBD;
+    color: #F9E2AF;
+}
+.inputnavbar{
+    border: solid 1px #009FBD;
+    color: #009FBD !important;
+    background-color: #F9E2AF;
+}
+.inputnavbar::placeholder{
+    color: #009FBD !important;
+}
+.inputnavbar:focus{
+    border: solid 1px #009FBD;
+    color: #009FBD !important;
+    background-color: #F9E2AF;
+}
+.linavbar{
+    color: #210062!important;
+
+}
+.linavbar:hover{
+    color: #009FBD!important;
+    font-weight: bold;
+}
+.brand{
+    color: #77037B ;
+    font-weight: bold;
+    font-size: 24px!important;
+    text-decoration: none;
+}
+.brand:hover{
+    color: #009FBD ;
+    font-weight: bold;
+    font-size: 24px!important;
+    text-decoration: none;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
