@@ -13,43 +13,36 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['edit_post'])) {
-
-    if (trim($_POST['title']) != "" && trim($_POST['author']) != "" && trim($_POST['category_id']) != "" && trim($_POST['body']) != "" ) {
-
+    if (trim($_POST['title']) != "" && trim($_POST['author']) != "" && trim($_POST['category_id']) != "" && trim($_POST['body']) != "") {
         $title = $_POST['title'];
         $author = $_POST['author'];
         $category_id = $_POST['category_id'];
         $body = $_POST['body'];
-        
-        if( trim($_FILES['image']['name']) != "" ){
-         
-          $name_image = $_FILES['image']['name'];
-          $tmp_name = $_FILES['image']['tmp_name'];
-          if (move_uploaded_file($tmp_name, "../upload/posts/$name_image")) {
-              echo "Upload Success";
-          } else {
-              echo "Upload Error";
-          }
+        $status = 0;
 
-          $post_update = $db->prepare("UPDATE posts SET title =:title, author=:author, category_id=:category_id, body=:body, image=:image WHERE id=:id");
-          $post_update->execute(['title' => $title, 'author' => $author, 'category_id' => $category_id, 'body' => $body, 'image' => $name_image, 'id' => $post_id]);
+        if (trim($_FILES['image']['name']) != "") {
+            $name_image = $_FILES['image']['name'];
+            $tmp_name = $_FILES['image']['tmp_name'];
+            if (move_uploaded_file($tmp_name, "../upload/posts/$name_image")) {
+                echo "Upload Success";
+            } else {
+                echo "Upload Error";
+            }
 
-        }else{
-
-          $post_update = $db->prepare("UPDATE posts SET title =:title, author=:author, category_id=:category_id, body=:body , status = 0 WHERE id=:id");
-          $post_update->execute(['title' => $title, 'author' => $author, 'category_id' => $category_id, 'body' => $body, 'id' => $post_id]);
-
+            $post_update = $db->prepare("UPDATE posts SET title=:title, author=:author, category_id=:category_id, body=:body, status=:status, image=:image WHERE id=:id");
+            $post_update->execute(['title' => $title, 'author' => $author, 'category_id' => $category_id, 'body' => $body, 'status' => $status, 'image' => $name_image, 'id' => $post_id]);
+        } else {
+            $post_update = $db->prepare("UPDATE posts SET title=:title, author=:author, category_id=:category_id, body=:body, status=:status WHERE id=:id");
+            $post_update->execute(['title' => $title, 'author' => $author, 'category_id' => $category_id, 'body' => $body, 'status' => $status, 'id' => $post_id]);
         }
 
-        header("Location:post.php");
+        header("Location: post.php");
         exit();
-
     } else {
-        header("Location:edit_post.php?id=$post_id&err_msg= fields are necessary");
+        header("Location: edit_post.php?id=$post_id&err_msg=fields are necessary");
         exit();
     }
 }
-
 ?>
 
 <div class="container-fluid">
